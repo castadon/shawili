@@ -1,0 +1,78 @@
+<section id="home">
+    <img src="../../images/bckg.jpg" class="bg">
+
+    <div id="jumbo-login" class="container">
+
+      <form class="form-signin" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
+        <h3 class="form-signin-heading">Please, choose one:</h3>
+
+        <div id="amazon-root"></div>
+			<script type="text/javascript">
+			  window.onAmazonLoginReady = function() {
+			    //amazon.Login.setClientId('YOUR-CLIENT-ID');
+			    amazon.Login.setClientId('amzn1.application-oa2-client.a500985a241a42298337a275e482846d');
+			  };
+			  (function(d) {
+			    var a = d.createElement('script'); a.type = 'text/javascript';
+			    a.async = true; a.id = 'amazon-login-sdk';
+			    a.src = 'https://api-cdn.amazon.com/sdk/login1.js';
+			    d.getElementById('amazon-root').appendChild(a);
+			  })(document);
+			</script>
+
+		<p>
+			<a href="#" id="LoginWithAmazon">
+				<img border="0" alt="Login with Amazon"
+			    src="http://g-ecx.images-amazon.com/images/G/01/lwa/btnLWA_gold_312x64.png"
+			    width="312" height="64" />
+			</a>
+		</p>
+
+		<script type="text/javascript">
+		document.getElementById('LoginWithAmazon').onclick = function() {
+			setTimeout(window.doLogin, 1);
+			return false;
+		};
+		window.doLogin = function() {
+			options = {};
+			options.scope = 'profile';
+			amazon.Login.authorize(options, function(response) {
+				if ( response.error ) {
+					alert('oauth error ' + response.error);
+					return;
+				}
+				amazon.Login.retrieveProfile(response.access_token, function(response) {
+					alert('Hello, ' + response.profile.Name);
+					alert('Your e-mail address is ' + response.profile.PrimaryEmail);
+					alert('Your unique ID is ' + response.profile.CustomerId);
+					if ( window.console && window.console.log )
+						window.console.log(response);
+				});
+			});
+		};
+		</script>
+
+        <hr><h3>or</h3><hr>
+
+    <div class="alert alert-danger" ng-show="error">
+        <span class="glyphicon glyphicon-exclamation-sign"></span>
+        <span class="sr-only">Error:</span>
+        {{ error }}
+    </div>
+
+        <label for="inputEmail" class="sr-only">User Name</label>
+        <input type="email" ng-model="login.email" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
+
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" ng-model="login.password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="login.remember" value="remember-me"> Remember me
+          </label>
+        </div>
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->
+</section>

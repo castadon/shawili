@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.col-lg-6, .col-sm-6 {
+	padding: 0px;
+	min-height: 100%;
+}
+html, body, .angular-google-map-container {
+height: 1000px;
+margin: 0px;
+padding: 0px
+}
+
+img.principal { position: absolute;
+    		left: 0px;
+    		top: 0px;
+    		z-index: -1;
+    		opacity: 0.2
+    	}
+  
+
+@import 'directives/main';
+@import 'home/main';
+@import 'login/main';

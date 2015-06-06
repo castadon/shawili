@@ -1,0 +1,65 @@
+<div id="app" class="clearfix">
+<img src="../../images/books.jpg" class="bg principal">
+    <div class="map-container col-sm-6 col-lg-6">
+      <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+  		<ui-gmap-marker ng-repeat="location in locations" coords="location.coords" idkey="location.id">
+			
+			<ui-gmap-window show='location.show'>
+                <div>{{location.text}}</div>
+            </ui-gmap-window>
+
+		</ui-gmap-marker>
+		
+		
+		</ui-gmap-google-map>
+    </div>
+    
+    <div id="control-panel" class="col-sm-6 col-lg-6 clearfix">
+
+    	<div class="col-xs-12">
+    		<div class="top-panel">
+    			<button class="btn btn-lg btn-primary btn-block" 
+    			ng-click="getQuantityMarkers()">Show items on the map</button>
+		        <form class="form-signin" ng-submit="scrape()">
+		        <h4 class="form-signin-heading">Please, insert the link to your wish list</h4>
+		        
+		        <input type="text" id="inputLink" name="inputLink" class="form-control" placeholder="Link to your Amazon Wish List" ng-model="data.awl_Url" required autofocus></input>
+
+		        	<input type="text" id="zipCode" name="zipCode" class="form-control" placeholder="Zip Code (first 5 digits)" ng-model="data.zipCode" required></input>
+				<div class="checkbox">
+		        	<label><input type="checkbox" ng-model="data.agree" name="agree"> Agree terms and conditions</label>
+		        </div>
+		        <button class="btn btn-lg btn-primary btn-block" type="submit">Upload items</button>
+		      </form>
+		    </div> <!-- /jumbotron -->
+
+    	</div>
+
+    	<div class="col-xs-6 col-sm-12">
+    		<div class="panel panel-default">
+
+    			<table class="table table-condensed">
+    			<thead>
+    				<tr>
+    					<th>#</th><th>Title</th><th>Locate</th>
+    				</tr>
+    			</thead>
+    			<tbody><!-- Trick: dont put references to controllers inside the HTML... -->
+    				<tr ng-repeat="item in itemList" >
+    					<th scope="row">{{$index+1}}</th>
+    					<td><label>{{item.title}}</label></td>
+    					<td><input type="checkbox" checklist-model="data.matches" 
+					checklist-value="item.itemId" ng-click="updateMap($index)"></td>
+					</tr>
+				</tbody>
+    			</table>
+    			<img ng-show="loading === true" src="../../images/loader.gif" class="principal">
+    		</div>
+    	</div>
+    </div>
+</div>
+
+ 
+
+
+

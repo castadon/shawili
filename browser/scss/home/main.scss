@@ -1,0 +1,49 @@
+#home {
+  fullstack-logo {
+    padding-top: 30px;
+    width: 150px;
+    margin: 0 auto;
+  }
+  h1 {
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  img.bg {
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+	
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+	
+  /* Set up positioning */
+  position: fixed;
+  top: 50px;
+  left: 0;
+}
+
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+	  img.bg {
+	    left: 50%;
+	    margin-left: -512px;   /* 50% */
+	  }
+	}
+
+#jumbo-login { 
+	position: relative;
+	width: 352px;
+	margin: 50px auto; 
+	padding: 20px;
+	opacity: 0.92;
+	border-radius: 6px;
+  	background: rgb(199, 196, 162);
+	-moz-box-shadow: 0 0 20px black;
+	-webkit-box-shadow: 0 0 20px black;
+	box-shadow: 0 0 20px black; }
+
+	h2,h3 { text-align: center; }
+
+}
+
